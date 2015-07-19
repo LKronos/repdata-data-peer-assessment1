@@ -8,12 +8,10 @@ output: html_document
 
 
 ###Helpful Information that I used for coding 
-Activity monitoring data from github repository that contains the dataset. 
-Use of aggregate function is great: http://www.statmethods.net/management/aggregate.html  
-Replace NA values:
-http://stackoverflow.com/questions/19379081/how-to-replace-na-values-in-a-table-for-selected-columns-data-frame-data-tab 
-or http://stackoverflow.com/questions/13172711/replace-na-values-from-a-column-with-0-in-data-frame-r 
-ggplot: http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+* Activity monitoring data from github repository that contains the dataset. 
+* Use of aggregate function is great: http://www.statmethods.net/management/aggregate.html  
+* Replace NA values: http://stackoverflow.com/questions/19379081/how-to-replace-na-values-in-a-table-for-selected-columns-data-frame-data-tab  or http://stackoverflow.com/questions/13172711/replace-na-values-from-a-column-with-0-in-data-frame-r 
+* ggplot facets: http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
 
 
 ## 1. Loading and preprocessing the data
@@ -81,8 +79,7 @@ steps_day_mean <- aggregate(steps ~ interval, data = allactivity_data, FUN=sum, 
 ###Make a time series plot 
 
 ```r
-plot (steps_day_mean$interval, steps_day_mean$steps, xlab='5-Minute Interval of a  Day', ylab='Average Number of Steps', main ='5-Minute 
-      Time SeriesPlot of Average Steps Across All Days', type="l")
+plot (steps_day_mean$interval, steps_day_mean$steps, xlab='5-Minute Interval of a  Day', ylab='Average Number of Steps', main ='5-Minute Time SeriesPlot of Average Steps Across All Days', type="l")
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
@@ -131,11 +128,10 @@ median_steps2 <-median(steps_day_sum2$steps)
 ```
 The Median is 10766 steps per day. 
 The Mean is 10766 steps per day.
-###Do these values differ from the estimates from the fist part and what is the impact of imputting missing data on 
-###the estimates of the total daily number of steps.
-Median of 10766has gone up slightly from before of 10765, Mean of `mean_steps2`is the same 
+###Do these values differ from the estimates from the fist part and what is the impact of imputting missing data on the estimates of the total daily number of steps.
+Median of 10766 has gone up slightly from before value of 10765; Mean of `mean_steps2`is the same. 
 This makes sense because replacing the missing data with a mean values would not change the mean value.
-It also makes sense that the mediaun is closer to the mean, since more mean values were used. 
+It also makes sense that the median is closer to the mean, since more mean values were used. 
 
 ## 5. Are there differences in activity patterns between weekdays and weekends? 
 ###Create a new factor variable in the dataset with two levels - 'weekday' and 'weekend'
@@ -147,8 +143,7 @@ allactivity_replaceDay [,'date'] <- as.POSIXct(allactivity_replaceDay$date)
 allactivity_replaceDay$weekday = weekdays(allactivity_replaceDay$date)
 
 allactivity_replaceDay$weekdayGroup <- ifelse(allactivity_replaceDay$weekday == "Saturday" |
-                                                      allactivity_replaceDay$weekday==
-                                               "Sunday" , "weekend" , "weekday") 
+        allactivity_replaceDay$weekday=="Sunday" , "weekend" , "weekday") 
 str(allactivity_replaceDay)
 ```
 
